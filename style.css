@@ -15,8 +15,8 @@ body {
 /* Полароид «это мы» — приклеен к верхнему-левому углу окна */
 #polaroid {
   position: absolute;
-  top: -40px;
-  left: -54px;
+  top: -38px;
+  left: -16px;
   z-index: 8;
   display: none;
   width: 176px;
@@ -65,7 +65,7 @@ body {
   .letter-window.final .cat { width: 96px; }
   .btn, .yes-btn, .no-btn { width: 96px; }
   .final-text { font-size: 14px; padding: 10px 14px; line-height: 1.45; }
-  #polaroid { top: -20px; left: -8px; width: 104px; padding: 6px 6px 0; }
+  #polaroid { top: -18px; left: 0; width: 104px; padding: 6px 6px 0; }
   #polaroid img { width: 92px; height: 70px; }
   #polaroid span { font-size: 10px; padding: 5px 0 7px; }
   #mute { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 19px; }
