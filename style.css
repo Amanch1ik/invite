@@ -10,8 +10,62 @@ body {
   overflow: hidden;
 }
 
+#tsp { position: fixed; inset: 0; z-index: 0; }
+
+/* Полароид «это мы» — приклеен к верхнему-левому углу окна */
+#polaroid {
+  position: absolute;
+  top: -40px;
+  left: -54px;
+  z-index: 8;
+  display: none;
+  width: 176px;
+  background: #fffdf8;
+  padding: 10px 10px 0;
+  border: 2px solid #e8c9cf;
+  border-radius: 3px;
+  box-shadow: 0 14px 30px rgba(120, 20, 40, 0.32);
+}
+#polaroid img { display: block; width: 156px; height: 118px; object-fit: cover; background: #f0e0e4; }
+#polaroid span {
+  display: block;
+  text-align: center;
+  font-family: "Pixelify Sans", "Handjet", sans-serif;
+  font-weight: 700;
+  color: #b0122a;
+  font-size: 14px;
+  padding: 8px 0 10px;
+}
+@media (max-width: 640px) {
+  #polaroid { top: -26px; left: -10px; width: 116px; padding: 7px 7px 0; }
+  #polaroid img { width: 102px; height: 78px; }
+  #polaroid span { font-size: 11px; padding: 6px 0 8px; }
+}
+
+/* Аудио-плеер: в зоне видимости (иначе YouTube не играет), но незаметный */
+#yt { position: fixed; right: 8px; bottom: 8px; width: 200px; height: 200px; opacity: 0.01; z-index: -1; pointer-events: none; }
+#yt iframe { width: 200px; height: 200px; border: 0; }
+
+/* Кнопка звука */
+#mute {
+  position: fixed;
+  top: 16px; right: 16px;
+  z-index: 6;
+  font-size: 22px;
+  width: 46px; height: 46px;
+  border: 3px solid #d76a77;
+  background: #fff0f2;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #d76a77;
+  transition: transform 0.1s;
+}
+#mute:active { transform: translateY(3px); box-shadow: 0 1px 0 #d76a77; }
+
 /* Экран конверта */
 #envelope-container {
+  position: relative;
+  z-index: 2;
   text-align: center;
   cursor: pointer;
   color: #b0303f;
@@ -23,25 +77,23 @@ body {
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
-#envelope {
-  width: 200px;
-  animation: pulse 1.5s infinite;
-  cursor: pointer;
-}
+#envelope { width: 200px; animation: pulse 1.5s infinite; cursor: pointer; }
 
 #letter-container {
   display: none;
   position: fixed;
   inset: 0;
+  z-index: 2;
   justify-content: center;
   align-items: center;
 }
 
 .letter-window {
+  position: relative;
   width: 90vw;
   max-width: 760px;
   aspect-ratio: 3/2;
-  padding: 168px 44px 0 44px;
+  padding: 196px 44px 0 44px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -53,67 +105,70 @@ body {
   background-position: center;
   gap: 2px;
   color: #3a2a2a;
-
-  transform: scale(1.15);
-  opacity: 0;
-  transition: transform 0.6s ease, opacity 0.6s ease;
 }
-.letter-window.open { transform: scale(1); opacity: 1; }
 
 h1 {
-  font-size: 27px;
-  line-height: 1.15;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.25;
   margin: 0;
-  color: #b0303f;
+  color: #4a0c16;
+  background: #fff4ef;
+  border: 3px solid #d76a77;
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-shadow: 3px 3px 0 rgba(120, 20, 40, 0.22);
+}
+
+/* След за курсором + реакции котика */
+.trail-heart { position: fixed; z-index: 40; pointer-events: none; user-select: none; will-change: transform, opacity; }
+.cat-heart { position: fixed; z-index: 41; pointer-events: none; user-select: none; will-change: transform, opacity; }
+.purr {
+  position: fixed;
+  z-index: 41;
+  pointer-events: none;
+  user-select: none;
+  font-family: "Pixelify Sans", "Handjet", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #b0122a;
+  text-shadow: 1px 1px 0 #fff;
+  white-space: nowrap;
 }
 
 /* Кот */
-.cat {
-  width: 210px;
-  margin: 6px 0;
-  transition: width 0.4s ease;
-}
-.letter-window.final .cat { width: 132px; margin: 2px 0; }
+.cat { width: 168px; margin: 4px 0; transition: width 0.4s ease; cursor: grab; }
+.cat:active { cursor: grabbing; }
+.letter-window.final .cat { width: 120px; margin: 2px 0; }
 
 /* Кнопки */
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  position: relative;
-}
+.buttons { display: flex; justify-content: center; gap: 30px; position: relative; }
 .no-wrapper { position: relative; }
 .btn { width: 118px; cursor: pointer; user-select: none; }
 .yes-btn, .no-btn { width: 118px; height: auto; display: inline-block; }
-.yes-btn {
-  position: relative;
-  z-index: 2;
-  transform-origin: center center;
-  transition: transform 0.3s ease;
-}
-.yes-btn:hover { transform: scale(1.06); }
-.no-btn {
-  z-index: 1;
-  position: relative;
-  transition: transform 0.3s ease;
-  cursor: default;
-}
+.yes-btn { position: relative; z-index: 2; transform-origin: center center; }
+.yes-btn:hover { filter: brightness(1.05); }
+.no-btn { z-index: 1; position: relative; cursor: default; }
 
 /* Детали после «Да» */
 .final-text {
   font-size: 17px;
-  line-height: 1.45;
+  font-weight: 500;
+  line-height: 1.5;
   text-align: center;
   display: inline-block;
-  padding: 12px 20px;
-  background-color: rgba(255, 240, 240, 0.72);
-  border-radius: 12px;
-  color: #5a2330;
+  padding: 12px 22px;
+  background: #fff4ef;
+  border: 3px solid #d76a77;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 rgba(120, 20, 40, 0.22);
+  color: #4a0c16;
 }
-.final-text b { color: #b0303f; }
+.final-text .ri { margin: 4px 0; }
+.final-text b { color: #b0122a; font-weight: 700; }
 .maplink {
   display: inline-block;
-  margin-top: 8px;
+  margin-top: 6px;
   color: #b0303f;
   text-decoration: none;
   border-bottom: 2px solid #e79aa6;
@@ -122,9 +177,10 @@ h1 {
 
 @media (max-width: 520px) {
   .letter-window { padding: 22vw 24px 0; }
-  h1 { font-size: 21px; }
+  h1 { font-size: 21px; min-height: 50px; }
   .cat { width: 150px; }
-  .letter-window.final .cat { width: 100px; }
+  .letter-window.final .cat { width: 96px; }
   .btn, .yes-btn, .no-btn { width: 92px; }
   .final-text { font-size: 14px; padding: 8px 12px; }
+  #envelope-container p { font-size: 26px; }
 }

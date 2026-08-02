@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <title>Свидание? 💌</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -12,8 +13,21 @@
       href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Handjet:wght@400..700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Готовые библиотеки -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/all@3/tsparticles.all.bundle.min.js"></script>
   </head>
   <body>
+    <div id="tsp"></div>
+    <!-- Музыка: Lana Del Rey — Young and Beautiful (YouTube embed) -->
+    <div id="yt" aria-hidden="true"></div>
+
+    <button id="mute" title="звук">🔊</button>
+
     <!-- Экран конверта -->
     <div id="envelope-container">
       <img src="envelope.png" alt="Конверт" id="envelope" />
@@ -23,27 +37,34 @@
     <!-- Экран письма -->
     <div id="letter-container">
       <div class="letter-window">
-        <h1 id="letter-title">Пойдёшь со мной<br />на&nbsp;свидание?</h1>
+        <!-- Полароид «это мы» — прикреплён к углу окна, появляется на «Да» (нужен us.jpg) -->
+        <div id="polaroid"><img src="us.jpg" alt="это мы" onerror="this.closest('#polaroid').remove()" /><span>это мы 🤍</span></div>
+
+        <h1 id="letter-title"></h1>
 
         <img src="cat_heart.gif" class="cat" id="letter-cat" />
 
         <div class="buttons" id="letter-buttons">
           <img src="yes.png" class="btn yes-btn" alt="Yes" />
-
           <div class="no-wrapper">
             <img src="no.png" class="btn no-btn" alt="No" />
           </div>
         </div>
 
         <div id="final-text" class="final-text" style="display: none">
-          <b>Свидание назначено! 💛</b><br />
-          📅 9 августа &nbsp;·&nbsp; 🕑 14:00<br />
-          📍 Улица Асанкулов Азиз, 1/5<br />
-          👗 дресс-код: твоя улыбка<br />
-          <a class="maplink" href="https://2gis.kg/bishkek/geo/70030077156750960/74.653642,42.775954" target="_blank" rel="noreferrer">📍 открыть на карте</a>
+          <div class="ri"><b>Один день — и он только наш 🤍</b></div>
+          <div class="ri">🗓 9 августа, суббота</div>
+          <div class="ri">🕑 к 14:00 — я уже считаю часы ⏳</div>
+          <div class="ri">📍 Асанкулов Азиз, 1/5</div>
+          <div class="ri">👗 дресс-код — твоя улыбка 😊</div>
+          <div class="ri">
+            <a class="maplink" href="https://2gis.kg/bishkek/geo/70030077156750960/74.653642,42.775954" target="_blank" rel="noreferrer">📍 покажу, куда идти →</a>
+          </div>
         </div>
       </div>
     </div>
+
     <script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
   </body>
 </html>
