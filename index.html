@@ -1,58 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Свидание? 🥺💌</title>
-  <meta name="description" content="У меня к тебе один вопрос…" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="hearts" id="hearts" aria-hidden="true"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Свидание? 💌</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ① Конверт -->
-  <section class="screen active" id="s1">
-    <div class="envelope" id="env" role="button" tabindex="0" aria-label="Открыть письмо">
-      <div class="env-back"></div>
-      <div class="letter"><span>для тебя 💗</span></div>
-      <div class="env-front"></div>
-      <div class="env-flap"></div>
-      <div class="seal">💌</div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Handjet:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Экран конверта -->
+    <div id="envelope-container">
+      <img src="envelope.png" alt="Конверт" id="envelope" />
+      <p>♡ Письмо для тебя ♡</p>
     </div>
-    <p class="hint">нажми, чтобы открыть</p>
-  </section>
 
-  <!-- ② Вопрос -->
-  <section class="screen" id="s2">
-    <div class="card pop">
-      <img class="sticker" alt="" src="https://media.giphy.com/media/FTGah7Mx3ss04PcasF/giphy.gif" />
-      <h1>Пойдёшь со мной<br />на свидание? 🥺</h1>
-      <p class="tiny">(правильный ответ только один 👀)</p>
-      <div class="btns">
-        <button class="yes" id="yes">Да! 🥰</button>
-        <button class="no" id="no">Нет</button>
+    <!-- Экран письма -->
+    <div id="letter-container">
+      <div class="letter-window">
+        <h1 id="letter-title">Пойдёшь со мной<br />на&nbsp;свидание?</h1>
+
+        <img src="cat_heart.gif" class="cat" id="letter-cat" />
+
+        <div class="buttons" id="letter-buttons">
+          <img src="yes.png" class="btn yes-btn" alt="Yes" />
+
+          <div class="no-wrapper">
+            <img src="no.png" class="btn no-btn" alt="No" />
+          </div>
+        </div>
+
+        <div id="final-text" class="final-text" style="display: none">
+          <b>Свидание назначено! 💛</b><br />
+          📅 9 августа &nbsp;·&nbsp; 🕑 14:00<br />
+          📍 Улица Асанкулов Азиз, 1/5<br />
+          👗 дресс-код: твоя улыбка<br />
+          <a class="maplink" href="https://2gis.kg/bishkek/geo/70030077156750960/74.653642,42.775954" target="_blank" rel="noreferrer">📍 открыть на карте</a>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- ③ Детали -->
-  <section class="screen" id="s3">
-    <div class="card pop">
-      <img class="sticker" alt="" src="https://media.giphy.com/media/UMon0fuimoAN9ueUNP/giphy.gif" />
-      <h1>Урааа! 🎉</h1>
-      <p class="sub">Тогда запоминай, солнышко 💛</p>
-      <ul class="details">
-        <li><span class="emo">📅</span><span>Когда</span><b>9 августа, суббота</b></li>
-        <li><span class="emo">🕑</span><span>Во сколько</span><b>14:00</b></li>
-        <li><span class="emo">📍</span><span>Где</span><b>Улица Асанкулов Азиз, 1/5</b></li>
-        <li><span class="emo">👗</span><span>Дресс-код</span><b>твоя улыбка</b></li>
-      </ul>
-      <p class="cd" id="cd">до нашего свидания: <b>—</b></p>
-      <a class="map" href="https://2gis.kg/bishkek/geo/70030077156750960/74.653642,42.775954" target="_blank" rel="noreferrer">📍 Открыть на карте</a>
-      <p class="fin">не могу дождаться 🥰</p>
-    </div>
-  </section>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
